@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Button = ({ onClick, name, test, isDisabled }) => (
   <button
     disabled={isDisabled}
-    type='button'
+    type="button"
     onClick={onClick}
     data-testid={test}
   >
