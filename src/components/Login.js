@@ -6,6 +6,7 @@ import Input from './ultilityComponents/Input';
 import Button from './ultilityComponents/Button';
 import { onChange, getAPI } from '../action';
 import configIcon from '../images/config-icon.png';
+import Image from './ultilityComponents/Image';
 
 const Login = ({ onChangeProps, name, email, requestToken }) => (
   <div>
@@ -21,16 +22,14 @@ const Login = ({ onChangeProps, name, email, requestToken }) => (
     />
     <Link to="/game">
       <Button
-        onClick={() =>
-          requestToken('https://opentdb.com/api_token.php?command=request')
-        }
+        onClick={() => requestToken('https://opentdb.com/api_token.php?command=request')}
         isDisabled={!(name && email)}
         test="btn-play"
         name="Jogar"
       />
     </Link>
     <Link to="/settings" test="btn-settings" name="Configurações">
-      <img src={configIcon} alt="ícone de engrenagem" width="40px" />
+      <Image src={configIcon} alt="ícone de engrenagem" width="40px" />
     </Link>
   </div>
 );
