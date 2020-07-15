@@ -1,32 +1,39 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { onChange } from '../action';
 import Input from './ultilityComponents/Input';
 import Button from './ultilityComponents/Button';
+import { onChange, getAPI } from '../action';
 import configIcon from '../images/config-icon.png';
 
-const Login = ( onChangeProps, name, email ) => {
-  return (
-    <div>
-      <Input
-        onChange={(e) => onChangeProps(e.target.name, e.target.value)}
-        name="name"
-        test="input-player-name"
+const Login = (onChangeProps, name, email, requestToken) => (
+  <div>
+    <Input
+      onChange={(e) => onChangeProps(e.target.name, e.target.value)}
+      name="name"
+      test="input-player-name"
+    />
+    <Input
+      onChange={(e) => onChangeProps(e.target.name, e.target.value)}
+      name="email"
+      test="input-gravatar-email"
+    />
+    <Link to="/game">
+      <Button
+        onClick={() =>
+          requestToken('https://opentdb.com/api_token.php?command=request')
+        }
+        isDisabled={!(name && email)}
+        test="btn-play"
+        name="Jogar"
       />
-      <Input
-        onChange={(e) => onChangeProps(e.target.name, e.target.value)}
-        name="email"
-        test="input-gravatar-email"
-      />
-      <Link to="/game"><Button isDisabled={!(name && email)} test="btn-play" name="Jogar" /></Link>
-      <Link to="/settings" test="btn-settings" name="Configurações">
-        <img src={configIcon} alt="ícone de engrenagem" width="40px" />
-      </Link>
-    </div>
-  );
-};
+    </Link>
+    <Link to="/settings" test="btn-settings" name="Configurações">
+      <img src={configIcon} alt="ícone de engrenagem" width="40px" />
+    </Link>
+  </div>
+);
 
 Login.propTypes = {
   onChangeProps: PropTypes.func.isRequired,
@@ -41,6 +48,7 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   onChangeProps: onChange,
+  requestToken: getAPI,
 };
 
 export default connect(mapState, mapDispatch)(Login);
