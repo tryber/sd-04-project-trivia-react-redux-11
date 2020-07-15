@@ -4,6 +4,7 @@ import Input from './ultilityComponents/Input';
 import Button from './ultilityComponents/Button';
 import { onChange } from '../action';
 import { Link } from 'react-router-dom';
+import configIcon from '../images/config-icon.png';
 
 const Login = ({ onChangeProps, name, email }) => {
   return (
@@ -21,8 +22,8 @@ const Login = ({ onChangeProps, name, email }) => {
       <Link to="/game">
         <Button isDisabled={!(name && email)} test="btn-play" name="Jogar" />
       </Link>
-      <Link to="/settings">
-        <Button test="btn-settings" name="Configurações" />
+      <Link to="/settings"test="btn-settings" name="Configurações">
+        <img src={configIcon}  alt="ícone de engrenagem que redireciona para a pagina de configurações"/>
       </Link>
     </div>
   );
