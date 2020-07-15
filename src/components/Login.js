@@ -20,9 +20,7 @@ const Login = ({ onChangeProps, name, email, requestToken }) => (
     />
     <Link to="/game">
       <Button
-        onClick={() =>
-          requestToken('https://opentdb.com/api_token.php?command=request')
-        }
+        onClick={() => requestToken('https://opentdb.com/api_token.php?command=request')}
         isDisabled={!(name && email)}
         test="btn-play"
         name="Jogar"
