@@ -11,26 +11,26 @@ const Login = ({ onChangeProps, name, email, requestToken }) => (
   <div>
     <Input
       onChange={(e) => onChangeProps(e.target.name, e.target.value)}
-      name="name"
-      test="input-player-name"
+      name='name'
+      test='input-player-name'
     />
     <Input
       onChange={(e) => onChangeProps(e.target.name, e.target.value)}
-      name="email"
-      test="input-gravatar-email"
+      name='email'
+      test='input-gravatar-email'
     />
-    <Link to="/game">
+    <Link to='/game'>
       <Button
         onClick={() =>
           requestToken('https://opentdb.com/api_token.php?command=request')
         }
         isDisabled={!(name && email)}
-        test="btn-play"
-        name="Jogar"
+        test='btn-play'
+        name='Jogar'
       />
     </Link>
-    <Link to="/settings" test="btn-settings" name="Configurações">
-      <img src={configIcon} alt="ícone de engrenagem" width="40px" />
+    <Link to='/settings' test='btn-settings' name='Configurações'>
+      <img src={configIcon} alt='ícone de engrenagem' width='40px' />
     </Link>
   </div>
 );
@@ -51,4 +51,5 @@ Login.propTypes = {
   onChangeProps: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  requestToken: PropTypes.string.isRequired,
 };
