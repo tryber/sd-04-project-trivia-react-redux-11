@@ -7,7 +7,7 @@ import Button from './ultilityComponents/Button';
 import { onChange, getAPI } from '../action';
 import configIcon from '../images/config-icon.png';
 
-const Login = (onChangeProps, name, email, requestToken) => (
+const Login = ({ onChangeProps, name, email, requestToken }) => (
   <div>
     <Input
       onChange={(e) => onChangeProps(e.target.name, e.target.value)}
@@ -21,7 +21,9 @@ const Login = (onChangeProps, name, email, requestToken) => (
     />
     <Link to="/game">
       <Button
-        onClick={() => requestToken('https://opentdb.com/api_token.php?command=request')}
+        onClick={() =>
+          requestToken('https://opentdb.com/api_token.php?command=request')
+        }
         isDisabled={!(name && email)}
         test="btn-play"
         name="Jogar"
@@ -32,12 +34,6 @@ const Login = (onChangeProps, name, email, requestToken) => (
     </Link>
   </div>
 );
-
-Login.propTypes = {
-  onChangeProps: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-};
 
 const mapState = (state) => ({
   name: state.login.name,
@@ -50,3 +46,9 @@ const mapDispatch = {
 };
 
 export default connect(mapState, mapDispatch)(Login);
+
+Login.propTypes = {
+  onChangeProps: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};
