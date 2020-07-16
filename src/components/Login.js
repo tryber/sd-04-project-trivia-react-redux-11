@@ -50,5 +50,5 @@ Login.propTypes = {
   onChangeProps: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  requestToken: PropTypes.string.isRequired,
+  fecthAPI: PropTypes.func.isRequired,
 };
