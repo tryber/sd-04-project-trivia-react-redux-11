@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import from  PropTypes 'prop-types';
 
 export default class Header extends Component {
@@ -23,8 +24,17 @@ class Header extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  userData: state.loginReducer[0],
+  score: state.scoreReducer.points,
+});
+
+export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
-  userData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  userData: PropTypes.arrayOf(PropTypes.object),
   score: PropTypes.number.isRequired,
+};
+Header.defaultProps = {
+  userData: [],
 };
