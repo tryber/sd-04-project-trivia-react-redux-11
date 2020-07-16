@@ -8,7 +8,7 @@ import { onChange, getAPI } from '../action';
 import configIcon from '../images/config-icon.png';
 import Image from './ultilityComponents/Image';
 
-const Login = ({ onChangeProps, name, email, requestToken }) => (
+const Login = ({ onChangeProps, name, email, fecthAPI }) => (
   <div>
     <Input
       onChange={(e) => onChangeProps(e.target.name, e.target.value)}
@@ -22,7 +22,7 @@ const Login = ({ onChangeProps, name, email, requestToken }) => (
     />
     <Link to="/game">
       <Button
-        onClick={() => requestToken('https://opentdb.com/api_token.php?command=request')}
+        onClick={() => fecthAPI()}
         isDisabled={!(name && email)}
         test="btn-play"
         name="Jogar"
@@ -41,7 +41,7 @@ const mapState = (state) => ({
 
 const mapDispatch = {
   onChangeProps: onChange,
-  requestToken: getAPI,
+  fecthAPI: getAPI,
 };
 
 export default connect(mapState, mapDispatch)(Login);

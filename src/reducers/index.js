@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import login from './login';
-import tokenRequest from './tokenRequest';
-import triviaRequest from './triviaRequest';
+import apiRequest from './apiRequest';
 
-export default combineReducers({ login, tokenRequest, triviaRequest });
+export default combineReducers({ login, apiRequest });

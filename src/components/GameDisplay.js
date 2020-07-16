@@ -4,19 +4,19 @@ import { getAPI } from '../action';
 
 class GameDisplay extends React.Component {
   componentDidMount() {
-    const { requestTrivia, token } = this.props;
-    requestTrivia(`https://opentdb.com/api.php?amount=5&token=${token}`);
+    const { requestTrivia, triviaData, loading } = this.props;
+    if (!loading) requestTrivia();
   }
 
   render() {
     const { loading, triviaData } = this.props;
     if (loading || !triviaData) return <p>Loading</p>;
-    return triviaData.map((question) => (
+    return triviaData.map((question, index) => (
       <div>
         <h2 data-testid="question-text">{question.question}</h2>
         <p data-testid="correct-answer">{question.correct_answer}</p>
         {question.incorrect_answers.map((incorrectQuestion) => (
-          <p>{incorrectQuestion}</p>
+          <p data-testid={`wrong-answer-${index}`}>{incorrectQuestion}</p>
         ))}
       </div>
     ));
@@ -24,9 +24,9 @@ class GameDisplay extends React.Component {
 }
 
 const mapState = (state) => ({
-  token: state.tokenRequest.token,
-  loading: state.triviaRequest.loading,
-  triviaData: state.triviaRequest.triviaData,
+  token: state.apiRequest.token,
+  loading: state.apiRequest.loading,
+  triviaData: state.apiRequest.triviaData,
 });
 
 const mapDispatch = {
