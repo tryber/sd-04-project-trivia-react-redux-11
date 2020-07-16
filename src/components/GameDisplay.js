@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getAPI } from '../action';
 
 class GameDisplay extends React.Component {
   componentDidMount() {
-    const { requestTrivia, triviaData, loading } = this.props;
+    const { requestTrivia, loading } = this.props;
     if (!loading) requestTrivia();
   }
 
@@ -34,3 +35,10 @@ const mapDispatch = {
 };
 
 export default connect(mapState, mapDispatch)(GameDisplay);
+
+GameDisplay.propTypes = {
+  requestTrivia: PropTypes.func.isRequired,
+  triviaData: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,  
+};
+
