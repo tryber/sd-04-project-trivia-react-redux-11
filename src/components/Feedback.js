@@ -6,7 +6,7 @@ const Feedback = ({ acertos }) => {
 
   if (acertos >= 3) {
     return (
-      <div data-testid='feedback-tex'>
+      <div data-testid="feedback-tex">
         <h2>Mandou bem!</h2>
         <p>Você acertou {acertos} questões!</p>
         <p>Um total de {pontos} pontos</p>
@@ -14,7 +14,7 @@ const Feedback = ({ acertos }) => {
     );
   }
   return (
-    <div data-testid='feedback-tex'>
+    <div data-testid="feedback-tex">
       <h2>Podia ser melhor...!</h2>
       <p>Você acertou {acertos} questões!</p>
       <p>Um total de {pontos} pontos</p>
