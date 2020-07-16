@@ -1,4 +1,4 @@
-import { fetchToken, fetchTrivia } from '../services/fetchFunction';
+import fetchFunction from '../services/fetchFunction';
 
 export const ON_CHANGE = 'ON_CHANGE';
 export const REQUEST_API = 'REQUEST_API';
@@ -33,11 +33,11 @@ const requestAPIFailure = (error) => ({
 
 export const getAPI = () => (dispatch) => {
   dispatch(requestAPI());
-  return fetchToken().then(
+  return fetchFunction('https://opentdb.com/api_token.php?command=request').then(
     (token) => {
       dispatch(requestTokenSuccess(token));
       dispatch(requestAPI());
-      return fetchTrivia(token.token).then(
+      return fetchFunction(`https://opentdb.com/api.php?amount=5&token=${token.token}`).then(
         (trivia) => dispatch(requestAPISuccess(trivia)),
         (error) => dispatch(requestAPIFailure(error)),
       );
