@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Feedback = ({ acertos }) => {
+const FeedbackAnswers = ({ acertos }) => {
   const pontos = Number(acertos * 10);
 
   if (acertos >= 3) {
@@ -22,8 +22,8 @@ const Feedback = ({ acertos }) => {
   );
 };
 
-export default Feedback;
+export default FeedbackAnswers;
 
-Feedback.propTypes = {
+FeedbackAnswers.propTypes = {
   acertos: PropTypes.string.isRequired,
 };
