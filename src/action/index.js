@@ -5,6 +5,19 @@ export const REQUEST_API = 'REQUEST_API';
 export const REQUEST_TOKEN_SUCCESS = 'REQUEST_TOKEN_SUCCESS';
 export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
 export const REQUEST_API_FAILURE = 'REQUEST_API_FAILURE';
+export const TIMER_INIT = 'TIMER_INIT';
+export const TIMER_OVER = 'TIME_INIT';
+
+export const timerInit = (timeOn) => ({
+  type: TIMER_INIT,
+  timeOn
+})
+
+export const timerOver = (timeOver, timeOn) => ({
+  type: TIMER_OVER,
+  timeOver,
+  timeOn
+})
 
 export const onChange = (name, value) => ({
   type: ON_CHANGE,

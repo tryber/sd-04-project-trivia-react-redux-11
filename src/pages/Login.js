@@ -7,6 +7,7 @@ import Button from '../components/ultilityComponents/Button';
 import { onChange, getAPI } from '../action';
 import configIcon from '../images/config-icon.png';
 import Image from '../components/ultilityComponents/Image';
+import Timer from '../components/Timer';
 
 const Login = ({ onChangeProps, name, email, fecthAPI }) => (
   <div>
@@ -31,6 +32,7 @@ const Login = ({ onChangeProps, name, email, fecthAPI }) => (
     <Link to="game/settings" test="btn-settings" name="Configurações">
       <Image src={configIcon} alt="ícone de engrenagem" width="40px" />
     </Link>
+    <Timer />
   </div>
 );
 
