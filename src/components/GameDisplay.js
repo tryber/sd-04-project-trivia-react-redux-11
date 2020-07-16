@@ -39,6 +39,6 @@ export default connect(mapState, mapDispatch)(GameDisplay);
 GameDisplay.propTypes = {
   requestTrivia: PropTypes.func.isRequired,
   triviaData: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,  
+  loading: PropTypes.bool.isRequired,
 };
 
