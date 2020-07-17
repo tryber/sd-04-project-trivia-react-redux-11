@@ -11,6 +11,7 @@ class Timer extends Component {
     this.state = initialState;
     this.timerStart = this.timerStart.bind(this);
     this.timerStop = this.timerStop.bind(this);
+    this.timerReset = this.timerReset.bind(this);
   }
 
   componentDidMount() {
@@ -23,22 +24,30 @@ class Timer extends Component {
     const { timeOn } = this.props;
     if (timeOn && time > 0) {
       this.timerStart();
-    } else if (time === 0) {
+    }
+    if (time === 0) {
       this.timerStop();
     }
+    if (time !== 0 && time < 30 && !timeOn) {
+      this.timerReset();
+    }
+  }
+
+  timerReset() {
+    this.setState(initialState);
   }
 
   timerStart() {
     const { time } = this.state;
     setTimeout(() => {
       this.setState({ time: time - 1 });
-    }, 1000);
+    }, 200);
   }
 
-  timerStop() {
+  async timerStop() {
     const { timerOverProps } = this.props;
-    timerOverProps(true, false);
-    return this.setState(initialState);
+    await timerOverProps(true, false);
+    await this.timerReset();
   }
 
   render() {
@@ -48,6 +57,8 @@ class Timer extends Component {
 }
 const mapStateToProps = (state) => ({
   timeOn: state.answers.timer.timeOn,
+  timeOver: state.answers.timer.timeOver,
+  isAnswered: state.answers.isAnswered,
 });
 
 const mapDispatchToProps = (dispatch) => ({

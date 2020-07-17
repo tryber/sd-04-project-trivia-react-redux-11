@@ -56,7 +56,7 @@ const QuestionAnswers = ({
         })}
         {(isAnswered || timeOver) && (
           <Button
-            onClick={() => nextButton()}
+            onClick={() => { nextButton(); }}
             className="nextButton"
             test="btn-next"
             name="Próxima"

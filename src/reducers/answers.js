@@ -11,7 +11,12 @@ const INITIAL_STATE = {
 const answers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CHOOSE_ANSWER:
-      return { ...state, answerType: action.answerType, isAnswered: true };
+      return {
+        ...state,
+        answerType: action.answerType,
+        isAnswered: true,
+        timer: ({ ...state.timer, timeOn: false, timeOver: true }),
+      };
     case NEXT_BUTTON:
       if (state.selected === 4) return { ...state, feedback: true };
       return {
@@ -21,19 +26,12 @@ const answers = (state = INITIAL_STATE, action) => {
         timer: { ...state.timer, timeOn: true, timeOver: false },
       };
     case TIMER_INIT:
-      return {
-        ...state,
-        timer: { ...state.timer, timeOn: action.timeOn },
-      };
+      return { ...state, timer: { ...state.timer, timeOn: true } };
     case TIMER_OVER:
       return {
         ...state,
         isAnswered: true,
-        timer: {
-          ...state.timer,
-          timeOver: action.timeOver,
-          timeOn: action.timeOn,
-        },
+        timer: { ...state.timer, timeOver: true, timeOn: false },
       };
     default:
       return state;
