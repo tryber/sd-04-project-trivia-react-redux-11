@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import FeedbackAnswears from './FeedbackAnswears'; // porque nao chama??
 
-class FeedbackAnswears extends React.Component {
+class Feedback extends React.Component {
   restartGame() {
     const { clearlogin } = this.props;
     clearlogin();
