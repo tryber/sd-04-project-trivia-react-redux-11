@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAPI, chooseAnswer } from '../action';
-import QuestionAnswers from './QuestionAnswers';
+import QuestionAnswers from '../components/QuestionAnswers';
 
 class GameDisplay extends React.Component {
   componentDidMount() {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Header from './Header';
-import FeedbackAnswears from './FeedbackAnswears'; // porque nao chama??
+import Header from '../components/Header';
+import FeedbackAnswears from '../components/FeedbackAnswers'; // porque nao chama??
 
 class Feedback extends React.Component {
   restartGame() {

@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Input from './ultilityComponents/Input';
-import Button from './ultilityComponents/Button';
+import Input from '../components/ultilityComponents/Input';
+import Button from '../components/ultilityComponents/Button';
 import { onChange, getAPI } from '../action';
 import configIcon from '../images/config-icon.png';
-import Image from './ultilityComponents/Image';
+import Image from '../components/ultilityComponents/Image';
 
 const Login = ({ onChangeProps, name, email, fecthAPI }) => (
   <div>
@@ -28,7 +28,7 @@ const Login = ({ onChangeProps, name, email, fecthAPI }) => (
         name="Jogar"
       />
     </Link>
-    <Link to="/settings" test="btn-settings" name="Configurações">
+    <Link to="game/settings" test="btn-settings" name="Configurações">
       <Image src={configIcon} alt="ícone de engrenagem" width="40px" />
     </Link>
   </div>
