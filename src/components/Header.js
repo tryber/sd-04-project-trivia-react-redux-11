@@ -1,12 +1,40 @@
-import React from 'react';
-import logo from '../trivia.png';
-import Image from './ultilityComponents/Image';
-import '../App.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import from  PropTypes 'prop-types';
 
-const Header = () => (
-  <header className="App-header">
-    <Image src={logo} alt="logo-trivia" width={`${20}%`} />
-  </header>
-);
+export default class Header extends Component {
+class Header extends Component {
+  render() {
+    const { userData, score } = this.props;
+    return (
+      <div>
+        <p>teste</p>
+      <div className="questions-header">
+        {userData && (
+        <img
+          src={`https://www.gravatar.com/avatar/${userData.avatar}`}
+          data-testid="header-profile-picture"
+          alt="avatar"
+        />
+        )}
+        {userData && <p data-testid="header-player-name">{`Jogador: ${userData.name}`}</p>}
+        <p data-testid="header-score">{`Pontos: ${score}`}</p>
+      </div>
+    );
+  }
+}
 
-export default Header;
+const mapStateToProps = (state) => ({
+  userData: state.loginReducer[0],
+  score: state.scoreReducer.points,
+});
+
+export default connect(mapStateToProps)(Header);
+
+Header.propTypes = {
+  userData: PropTypes.arrayOf(PropTypes.object),
+  score: PropTypes.number.isRequired,
+};
+Header.defaultProps = {
+  userData: [],
+};
