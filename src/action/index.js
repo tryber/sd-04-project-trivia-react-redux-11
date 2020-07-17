@@ -5,6 +5,7 @@ export const REQUEST_API = 'REQUEST_API';
 export const REQUEST_TOKEN_SUCCESS = 'REQUEST_TOKEN_SUCCESS';
 export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
 export const REQUEST_API_FAILURE = 'REQUEST_API_FAILURE';
+export const CHOOSE_ANSWER = 'CHOOSE_ANSWER';
 
 export const onChange = (name, value) => ({
   type: ON_CHANGE,
@@ -45,3 +46,8 @@ export const getAPI = () => (dispatch) => {
     (error) => dispatch(requestAPIFailure(error)),
   );
 };
+
+export const chooseAnswer = (answerType) => ({
+  type: CHOOSE_ANSWER,
+  answerType,
+});
