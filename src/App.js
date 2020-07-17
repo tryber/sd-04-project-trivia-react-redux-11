@@ -1,10 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
-import Login from './pages/Login';
+import Login from './Pages/Login';
 import Header from './components/Header';
-import GameDisplay from './components/GameDisplay';
-import SettingsPage from './pages/SettingsPage';
+import GameDisplay from './Pages/GameDisplay';
+import SettingsPage from './Pages/SettingsPage';
 
 export default function App() {
   return (

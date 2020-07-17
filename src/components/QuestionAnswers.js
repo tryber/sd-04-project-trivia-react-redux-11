@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { chooseAnswer, nextQuestion } from '../action';
 import sortAnswers from '../services/sortAnswers';
 import Button from './ultilityComponents/Button';
+import Timer from './Timer';
 import '../App.css';
 
 const QuestionAnswers = ({
@@ -14,6 +15,7 @@ const QuestionAnswers = ({
   isAnswered,
   nextButton,
   feedback,
+  timeOver,
 }) => {
   if (feedback) return <Redirect to="/feedback" />;
   let index = -1;
@@ -52,7 +54,7 @@ const QuestionAnswers = ({
             </div>
           );
         })}
-        {isAnswered && (
+        {(isAnswered || timeOver) && (
           <Button
             onClick={() => nextButton()}
             className="nextButton"
@@ -61,6 +63,7 @@ const QuestionAnswers = ({
           />
         )}
       </div>
+      <Timer />
     </div>
   );
 };
@@ -71,6 +74,7 @@ const mapState = (state) => ({
   isAnswered: state.answers.isAnswered,
   selected: state.answers.selected,
   feedback: state.answers.feedback,
+  timeOver: state.answers.timer.timeOver,
 });
 
 const mapDispatch = {
@@ -87,4 +91,5 @@ QuestionAnswers.propTypes = {
   isAnswered: PropTypes.bool.isRequired,
   nextButton: PropTypes.func.isRequired,
   feedback: PropTypes.bool.isRequired,
+  timeOver: PropTypes.bool.isRequired,
 };

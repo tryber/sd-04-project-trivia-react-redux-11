@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { timerInit, timerOver } from '../action';
 
-const initialState = ({ time: 30 });
+const initialState = { time: 30 };
 
 class Timer extends Component {
   constructor(props) {
@@ -12,6 +12,12 @@ class Timer extends Component {
     this.timerStart = this.timerStart.bind(this);
     this.timerStop = this.timerStop.bind(this);
   }
+
+  componentDidMount() {
+    const { timerInitProps } = this.props;
+    timerInitProps(true);
+  }
+
   componentDidUpdate() {
     const { time } = this.state;
     const { timeOn } = this.props;
@@ -30,38 +36,29 @@ class Timer extends Component {
   }
 
   timerStop() {
-    const { timeOver } = this.props;
-    timeOver(false, false);
+    const { timerOverProps } = this.props;
+    timerOverProps(true, false);
     return this.setState(initialState);
   }
 
   render() {
     const { time } = this.state;
-    const { timerInit, timeOn } = this.props;
-    return (
-      <div>
-        {time}
-        <button onClick={() => timerInit(!timeOn)}>ON/OFF</button>
-      </div >
-    );
+    return <div>{time}</div>;
   }
 }
 const mapStateToProps = (state) => ({
-  timeOn: state.timer.timeOn,
-  timeOver: state.timer.timeOver,
+  timeOn: state.answers.timer.timeOn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  timerInit: (e) => dispatch(timerInit(e)),
-  timerOver: (e) => dispatch(timerOver(e)),
+  timerInitProps: (e) => dispatch(timerInit(e)),
+  timerOverProps: (e) => dispatch(timerOver(e)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
 Timer.propTypes = {
-  timerOver: PropTypes.func.isRequired,
-  timerInit: PropTypes.func.isRequired,
   timeOn: PropTypes.bool.isRequired,
-  timeOver: PropTypes.bool.isRequired,
-  fecthAPI: PropTypes.string.isRequired,
+  timerInitProps: PropTypes.func.isRequired,
+  timerOverProps: PropTypes.func.isRequired,
 };

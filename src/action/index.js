@@ -61,11 +61,11 @@ export const nextQuestion = () => ({
 
 export const timerInit = (timeOn) => ({
   type: TIMER_INIT,
-  timeOn
-})
+  timeOn,
+});
 
 export const timerOver = (timeOver, timeOn) => ({
   type: TIMER_OVER,
   timeOver,
-  timeOn
-})
+  timeOn,
+});
