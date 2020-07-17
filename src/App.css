@@ -8,11 +8,11 @@
 }
 
 .red-border {
-  border: 1px solid red;
+  border: 3px solid rgb(255, 0, 0);
 }
 
 .green-border {
-  border: 1px solid green;
+  border: 3px solid rgb(6, 240, 15);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -31,6 +31,45 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.questions-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: auto;
+  margin: 5vh auto;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.nextButton { 
+  background-color: green;
+  margin-top: 100px;
+}
+
+.question-card {
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 1vh 1vw;
+  overflow: hidden;
+  padding: 1px;
+  transition: 0.3s;
+  width: 300px;
+}
+.question-card button {
+  background-color: #C4C4C4;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 3px;
+  min-width: 250px;
+  padding: 10px;
+  transition: 0.45s;
+}
+
 
 .App-link {
   color: #61dafb;

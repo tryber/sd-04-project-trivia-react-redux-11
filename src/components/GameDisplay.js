@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getAPI } from '../action';
+import { getAPI, chooseAnswer } from '../action';
+import QuestionAnswers from './QuestionAnswers';
 
 class GameDisplay extends React.Component {
   componentDidMount() {
@@ -11,16 +12,8 @@ class GameDisplay extends React.Component {
 
   render() {
     const { loading, triviaData } = this.props;
-    if (loading || !triviaData) return <p>Loading</p>;
-    return triviaData.map((question, index) => (
-      <div>
-        <h2 data-testid="question-text">{question.question}</h2>
-        <p data-testid="correct-answer">{question.correct_answer}</p>
-        {question.incorrect_answers.map((incorrectQuestion) => (
-          <p data-testid={`wrong-answer-${index}`}>{incorrectQuestion}</p>
-        ))}
-      </div>
-    ));
+    if (loading || triviaData.length === 0) return <p>Loading</p>;
+    return <QuestionAnswers />;
   }
 }
 
@@ -28,17 +21,18 @@ const mapState = (state) => ({
   token: state.apiRequest.token,
   loading: state.apiRequest.loading,
   triviaData: state.apiRequest.triviaData,
+  selected: state.answers.selected,
 });
 
 const mapDispatch = {
   requestTrivia: getAPI,
+  selectAnswer: chooseAnswer,
 };
 
 export default connect(mapState, mapDispatch)(GameDisplay);
 
 GameDisplay.propTypes = {
   requestTrivia: PropTypes.func.isRequired,
-  triviaData: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,  
+  triviaData: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
+  loading: PropTypes.bool.isRequired,
 };
-

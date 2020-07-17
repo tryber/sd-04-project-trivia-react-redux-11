@@ -24,7 +24,7 @@ const apiRequest = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        triviaData: action.data.results,
+        triviaData: [...action.data.results],
       };
     default:
       return state;
