@@ -1,6 +1,7 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import FeedbackAnswears from '../components/FeedbackAnswers'; // porque nao chama??
 
@@ -47,7 +48,7 @@ class Feedback extends React.Component {
             Jogar novamente
           </button>
         </Link>
-        <Link to="/"> 
+        <Link to="/">
           <button type="button" onClick={() => this.restartGame()} data-testid="btn-ranking">
             Ver Ranking
           </button>
@@ -56,4 +57,12 @@ class Feedback extends React.Component {
     );
   }
 }
-export default Feedback;
+
+export default connect()(Feedback);
+
+Feedback.propTypes = {
+  clearlogin: PropTypes.func.isRequired,
+  clearpoints: PropTypes.func.isRequired,
+  totalAnswears: PropTypes.string.isRequired,
+  scorePoints: PropTypes.number.isRequired,
+};
