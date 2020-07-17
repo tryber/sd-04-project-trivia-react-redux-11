@@ -55,5 +55,4 @@ export const chooseAnswer = (answerType) => ({
 
 export const nextQuestion = () => ({
   type: NEXT_BUTTON,
-  
 });

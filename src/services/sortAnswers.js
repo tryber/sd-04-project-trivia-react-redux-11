@@ -1,6 +1,3 @@
-const sortAnswers = (array) => array
-  .map((item) => ({ sort: Math.random() * Math.random(), value: item }))
-  .sort((itemA, itemB) => itemA.sort - itemB.sort)
-  .map((item) => item.value);
+const sortAnswers = (array) => array.sort(() => Math.random() - 0.5);
 
 export default sortAnswers;

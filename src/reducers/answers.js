@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   answerType: null,
   selected: 0,
   isAnswered: false,
+  feedback: false,
 };
 
 const answers = (state = INITIAL_STATE, action) => {

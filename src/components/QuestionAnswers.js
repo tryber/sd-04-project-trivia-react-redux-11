@@ -1,9 +1,11 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import sortAnswers from '../services/sortAnswers';
+import PropTypes from 'prop-types';
 import { chooseAnswer, nextQuestion } from '../action';
-import '../App.css';
+import sortAnswers from '../services/sortAnswers';
 import Button from './ultilityComponents/Button';
+import '../App.css';
 
 const QuestionAnswers = ({
   triviaData,
@@ -11,12 +13,12 @@ const QuestionAnswers = ({
   selected,
   isAnswered,
   nextButton,
+  feedback,
 }) => {
+  if (feedback) return <Redirect to="/feedback" />;
   let index = -1;
   const actualTrivia = triviaData[selected % triviaData.length];
-  const concatArr = actualTrivia.incorrect_answers.concat(
-    actualTrivia.correct_answer
-  );
+  const concatArr = actualTrivia.incorrect_answers.concat(actualTrivia.correct_answer);
   const answers = sortAnswers(concatArr);
   return (
     <div className="questions-container">
@@ -24,27 +26,30 @@ const QuestionAnswers = ({
         <h3 data-testid="question-category">{actualTrivia.category}</h3>
         <h2 data-testid="question-text">{actualTrivia.question}</h2>
         {answers.map((answer) => {
-          console.log(answers.length, 'tamanho array');
           if (answer === actualTrivia.correct_answer) {
             return (
-              <Button
-                className={isAnswered ? 'green-border' : ''}
-                onClick={() => selectAnswer('correct')}
-                isDisabled={isAnswered}
-                test="correct-answer"
-                name={actualTrivia.correct_answer}
-              />
+              <div key={answer}>
+                <Button
+                  className={isAnswered ? 'green-border' : ''}
+                  onClick={() => selectAnswer('correct')}
+                  isDisabled={isAnswered}
+                  test="correct-answer"
+                  name={actualTrivia.correct_answer}
+                />
+              </div>
             );
           }
           index += 1;
           return (
-            <Button
-              className={isAnswered ? 'red-border' : ''}
-              onClick={() => selectAnswer('wrong')}
-              isDisabled={isAnswered}
-              test={`wrong-answer-${index}`}
-              name={answer}
-            />
+            <div key={answer}>
+              <Button
+                className={isAnswered ? 'red-border' : ''}
+                onClick={() => selectAnswer('wrong')}
+                isDisabled={isAnswered}
+                test={`wrong-answer-${index}`}
+                name={answer}
+              />
+            </div>
           );
         })}
         {isAnswered && (
@@ -65,6 +70,7 @@ const mapState = (state) => ({
   answerType: state.answers.answerType,
   isAnswered: state.answers.isAnswered,
   selected: state.answers.selected,
+  feedback: state.answers.feedback,
 });
 
 const mapDispatch = {
@@ -73,3 +79,12 @@ const mapDispatch = {
 };
 
 export default connect(mapState, mapDispatch)(QuestionAnswers);
+
+QuestionAnswers.propTypes = {
+  triviaData: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
+  selectAnswer: PropTypes.func.isRequired,
+  selected: PropTypes.number.isRequired,
+  isAnswered: PropTypes.bool.isRequired,
+  nextButton: PropTypes.func.isRequired,
+  feedback: PropTypes.bool.isRequired,
+};

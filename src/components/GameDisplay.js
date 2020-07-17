@@ -12,7 +12,6 @@ class GameDisplay extends React.Component {
 
   render() {
     const { loading, triviaData } = this.props;
-    console.log(triviaData);
     if (loading || triviaData.length === 0) return <p>Loading</p>;
     return <QuestionAnswers />;
   }
@@ -34,6 +33,6 @@ export default connect(mapState, mapDispatch)(GameDisplay);
 
 GameDisplay.propTypes = {
   requestTrivia: PropTypes.func.isRequired,
-  triviaData: PropTypes.func.isRequired,
+  triviaData: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
   loading: PropTypes.bool.isRequired,
 };
