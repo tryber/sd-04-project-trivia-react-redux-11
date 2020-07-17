@@ -24,7 +24,7 @@ class Timer extends Component {
 
   timerStart() {
     const { time } = this.state;
-    setInterval(() => {
+    setTimeout(() => {
       this.setState({ time: time - 1 });
     }, 1000);
   }
@@ -38,7 +38,6 @@ class Timer extends Component {
   render() {
     const { time } = this.state;
     const { timerInit, timeOn } = this.props;
-    console.log(timerInit);
     return (
       <div>
         {time}
@@ -59,11 +58,10 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
-// Timer.propTypes = {
-//   timerOver: PropTypes.func.isRequired,
-//   timerOver: PropTypes.func.isRequired,
-
-//   timeOn: PropTypes.bool.isRequired,
-//   timeOver: PropTypes.bool.isRequired,
-//   fecthAPI: PropTypes.string.isRequired,
-// };
+Timer.propTypes = {
+  timerOver: PropTypes.func.isRequired,
+  timerInit: PropTypes.func.isRequired,
+  timeOn: PropTypes.bool.isRequired,
+  timeOver: PropTypes.bool.isRequired,
+  fecthAPI: PropTypes.string.isRequired,
+};
