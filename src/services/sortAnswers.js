@@ -1,9 +1,6 @@
-const sortAnswers = (questionAnswers) => {
-  const correctAnswer = questionAnswers.correct_answer;
-  const restOfAnswers = questionAnswers.incorrect_answers;
-  const randomIndex = Math.floor(Math.random() * 4);
-  restOfAnswers.splice(randomIndex, 0, correctAnswer);
-  return restOfAnswers;
-};
+const sortAnswers = (array) => array
+  .map((item) => ({ sort: Math.random() * Math.random(), value: item }))
+  .sort((itemA, itemB) => itemA.sort - itemB.sort)
+  .map((item) => item.value);
 
 export default sortAnswers;

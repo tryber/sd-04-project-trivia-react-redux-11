@@ -12,8 +12,9 @@ class GameDisplay extends React.Component {
 
   render() {
     const { loading, triviaData } = this.props;
-    if (loading) return <p>Loading</p>;
-    return <QuestionAnswers triviaData={triviaData} />;
+    console.log(triviaData);
+    if (loading || triviaData.length === 0) return <p>Loading</p>;
+    return <QuestionAnswers />;
   }
 }
 

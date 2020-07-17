@@ -42,6 +42,11 @@
   overflow: hidden;
 }
 
+.nextButton { 
+  background-color: green;
+  margin-top: 100px;
+}
+
 .question-card {
   align-items: center;
   border-radius: 5px;
@@ -64,6 +69,7 @@
   padding: 10px;
   transition: 0.45s;
 }
+
 
 .App-link {
   color: #61dafb;

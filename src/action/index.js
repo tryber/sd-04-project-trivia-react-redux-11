@@ -6,6 +6,7 @@ export const REQUEST_TOKEN_SUCCESS = 'REQUEST_TOKEN_SUCCESS';
 export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
 export const REQUEST_API_FAILURE = 'REQUEST_API_FAILURE';
 export const CHOOSE_ANSWER = 'CHOOSE_ANSWER';
+export const NEXT_BUTTON = 'NEXT_BUTTON';
 
 export const onChange = (name, value) => ({
   type: ON_CHANGE,
@@ -50,4 +51,9 @@ export const getAPI = () => (dispatch) => {
 export const chooseAnswer = (answerType) => ({
   type: CHOOSE_ANSWER,
   answerType,
+});
+
+export const nextQuestion = () => ({
+  type: NEXT_BUTTON,
+  
 });
