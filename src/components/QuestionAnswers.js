@@ -15,12 +15,13 @@ const QuestionAnswers = ({
   isAnswered,
   nextButton,
   feedback,
-  timeOver,
 }) => {
   if (feedback) return <Redirect to="/feedback" />;
   let index = -1;
   const actualTrivia = triviaData[selected % triviaData.length];
-  const concatArr = actualTrivia.incorrect_answers.concat(actualTrivia.correct_answer);
+  const concatArr = actualTrivia.incorrect_answers.concat(
+    actualTrivia.correct_answer
+  );
   const answers = sortAnswers(concatArr);
   return (
     <div className="questions-container">
@@ -54,9 +55,11 @@ const QuestionAnswers = ({
             </div>
           );
         })}
-        {(isAnswered || timeOver) && (
+        {isAnswered && (
           <Button
-            onClick={() => { nextButton(); }}
+            onClick={() => {
+              nextButton();
+            }}
             className="nextButton"
             test="btn-next"
             name="Próxima"
@@ -74,7 +77,6 @@ const mapState = (state) => ({
   isAnswered: state.answers.isAnswered,
   selected: state.answers.selected,
   feedback: state.answers.feedback,
-  timeOver: state.answers.timer.timeOver,
 });
 
 const mapDispatch = {
@@ -85,7 +87,8 @@ const mapDispatch = {
 export default connect(mapState, mapDispatch)(QuestionAnswers);
 
 QuestionAnswers.propTypes = {
-  triviaData: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
+  triviaData: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object]))
+    .isRequired,
   selectAnswer: PropTypes.func.isRequired,
   selected: PropTypes.number.isRequired,
   isAnswered: PropTypes.bool.isRequired,

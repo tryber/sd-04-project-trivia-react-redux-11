@@ -5,10 +5,12 @@ export const REQUEST_API = 'REQUEST_API';
 export const REQUEST_TOKEN_SUCCESS = 'REQUEST_TOKEN_SUCCESS';
 export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
 export const REQUEST_API_FAILURE = 'REQUEST_API_FAILURE';
+export const SAVE_NAME_EMAIL = 'SAVE_NAME_EMAIL';
 export const CHOOSE_ANSWER = 'CHOOSE_ANSWER';
 export const NEXT_BUTTON = 'NEXT_BUTTON';
-export const TIMER_INIT = 'TIMER_INIT';
-export const TIMER_OVER = 'TIME_INIT';
+export const SET_TIMER = 'SET_TIMER';
+export const RESET_TIMER = 'TIME_INIT';
+export const SHOW_TIME = 'SHOW_TIME';
 
 export const onChange = (name, value) => ({
   type: ON_CHANGE,
@@ -50,6 +52,12 @@ export const getAPI = () => (dispatch) => {
   );
 };
 
+export const playButton = (name, email) => ({
+  type: SAVE_NAME_EMAIL,
+  name,
+  email,
+});
+
 export const chooseAnswer = (answerType) => ({
   type: CHOOSE_ANSWER,
   answerType,
@@ -59,13 +67,10 @@ export const nextQuestion = () => ({
   type: NEXT_BUTTON,
 });
 
-export const timerInit = (timeOn) => ({
-  type: TIMER_INIT,
-  timeOn,
+export const setTimer = () => ({
+  type: SET_TIMER,
 });
 
-export const timerOver = (timeOver, timeOn) => ({
-  type: TIMER_OVER,
-  timeOver,
-  timeOn,
+export const resetTimer = () => ({
+  type: RESET_TIMER,
 });
