@@ -10,7 +10,7 @@ export default class Home extends Component {
         <header className="App-header">
           <Image src={logo} className="App-logo" alt="logo" />
           <p>SUA VEZ</p>
-          <Button/>
+          <Button />
         </header>
       </div>
     );
