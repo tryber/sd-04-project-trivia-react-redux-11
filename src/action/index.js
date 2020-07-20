@@ -9,6 +9,7 @@ export const CHOOSE_ANSWER = 'CHOOSE_ANSWER';
 export const NEXT_BUTTON = 'NEXT_BUTTON';
 export const TIMER_INIT = 'TIMER_INIT';
 export const TIMER_OVER = 'TIME_INIT';
+export const UPDATE_RANKING = 'UPDATE_RANKING';
 
 export const onChange = (name, value) => ({
   type: ON_CHANGE,
@@ -68,4 +69,11 @@ export const timerOver = (timeOver, timeOn) => ({
   type: TIMER_OVER,
   timeOver,
   timeOn,
+});
+
+export const updateRanking = (name, avatar, score) => ({
+  type: UPDATE_RANKING,
+  name,
+  avatar,
+  score,
 });
