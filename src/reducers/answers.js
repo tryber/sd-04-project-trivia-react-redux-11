@@ -1,11 +1,12 @@
-import { CHOOSE_ANSWER, NEXT_BUTTON, TIMER_INIT, TIMER_OVER } from '../action';
+import { CHOOSE_ANSWER, NEXT_BUTTON, SET_TIME } from '../action';
 
 const INITIAL_STATE = {
   answerType: null,
   selected: 0,
   isAnswered: false,
   feedback: false,
-  timer: { timerOn: false, timeOver: false },
+  timer: { time: 30 },
+  nextQuestion: false,
 };
 
 const answers = (state = INITIAL_STATE, action) => {
@@ -15,7 +16,6 @@ const answers = (state = INITIAL_STATE, action) => {
         ...state,
         answerType: action.answerType,
         isAnswered: true,
-        timer: ({ ...state.timer, timeOn: false }),
       };
     case NEXT_BUTTON:
       if (state.selected === 4) return { ...state, feedback: true };
@@ -23,16 +23,11 @@ const answers = (state = INITIAL_STATE, action) => {
         ...state,
         isAnswered: false,
         selected: state.selected + 1,
-        timer: { ...state.timer, timeOn: true, timeOver: false },
+        timer: { ...state.timer, time: 30 },
       };
-    case TIMER_INIT:
-      return { ...state, timer: { ...state.timer, timeOn: true } };
-    case TIMER_OVER:
-      return {
-        ...state,
-        isAnswered: true,
-        timer: { ...state.timer, timeOver: true, timeOn: false },
-      };
+    case SET_TIME:
+      return { ...state, timer: { ...state.timer, time: action.time } };
+
     default:
       return state;
   }

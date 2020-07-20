@@ -7,8 +7,7 @@ export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
 export const REQUEST_API_FAILURE = 'REQUEST_API_FAILURE';
 export const CHOOSE_ANSWER = 'CHOOSE_ANSWER';
 export const NEXT_BUTTON = 'NEXT_BUTTON';
-export const TIMER_INIT = 'TIMER_INIT';
-export const TIMER_OVER = 'TIME_INIT';
+export const SET_TIME = 'SET_TIME';
 
 export const onChange = (name, value) => ({
   type: ON_CHANGE,
@@ -59,13 +58,8 @@ export const nextQuestion = () => ({
   type: NEXT_BUTTON,
 });
 
-export const timerInit = (timeOn) => ({
-  type: TIMER_INIT,
-  timeOn,
+export const setTime = (time) => ({
+  type: SET_TIME,
+  time,
 });
 
-export const timerOver = (timeOver, timeOn) => ({
-  type: TIMER_OVER,
-  timeOver,
-  timeOn,
-});

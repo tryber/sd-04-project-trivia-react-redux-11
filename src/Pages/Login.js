@@ -28,7 +28,7 @@ const Login = ({ onChangeProps, name, email, fecthAPI }) => (
         name="Jogar"
       />
     </Link>
-    <Link to="game/settings" test="btn-settings" name="Configurações">
+    <Link to="game/settings" data-testid="btn-settings" name="Configurações">
       <Image src={configIcon} alt="ícone de engrenagem" width="40px" />
     </Link>
   </div>

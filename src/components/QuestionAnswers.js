@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { chooseAnswer, nextQuestion, timerOver } from '../action';
+import { chooseAnswer, nextQuestion } from '../action';
 import sortAnswers from '../services/sortAnswers';
 import Button from './ultilityComponents/Button';
 import Timer from './Timer';
@@ -14,9 +14,7 @@ const QuestionAnswers = ({
   selected,
   isAnswered,
   nextButton,
-  timerOverProps,
   feedback,
-  timeOver,
 }) => {
   if (feedback) return <Redirect to="/feedback" />;
   let index = -1;
@@ -55,12 +53,9 @@ const QuestionAnswers = ({
             </div>
           );
         })}
-        {(isAnswered || timeOver) && (
+        {(isAnswered) && (
           <Button
-            onClick={async () => {
-              await timerOverProps();
-              await nextButton();
-            }}
+            onClick={() => nextButton()}
             className="nextButton"
             test="btn-next"
             name="Próxima"
@@ -78,13 +73,11 @@ const mapState = (state) => ({
   isAnswered: state.answers.isAnswered,
   selected: state.answers.selected,
   feedback: state.answers.feedback,
-  timeOver: state.answers.timer.timeOver,
 });
 
 const mapDispatch = {
   selectAnswer: chooseAnswer,
   nextButton: nextQuestion,
-  timerOverProps: timerOver,
 };
 
 export default connect(mapState, mapDispatch)(QuestionAnswers);
@@ -96,6 +89,4 @@ QuestionAnswers.propTypes = {
   isAnswered: PropTypes.bool.isRequired,
   nextButton: PropTypes.func.isRequired,
   feedback: PropTypes.bool.isRequired,
-  timeOver: PropTypes.bool.isRequired,
-  timerOverProps: PropTypes.func.isRequired,
 };
