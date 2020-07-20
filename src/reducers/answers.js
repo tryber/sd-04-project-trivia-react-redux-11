@@ -16,6 +16,7 @@ const answers = (state = INITIAL_STATE, action) => {
         ...state,
         answerType: action.answerType,
         isAnswered: true,
+        timer: { ...state.timer, timeOn: true },
       };
     case NEXT_BUTTON:
       if (state.selected === 4) return { ...state, feedback: true };
@@ -23,10 +24,16 @@ const answers = (state = INITIAL_STATE, action) => {
         ...state,
         isAnswered: false,
         selected: state.selected + 1,
-        timer: { ...state.timer, time: 30 },
+        timer: { timeOn: true, time: 30 },
       };
     case SET_TIME:
-      return { ...state, timer: { ...state.timer, time: action.time } };
+      console.log(state.timer.time);
+      return {
+        ...state,
+        timer: {
+          ...state.timer, time: state.timer.time === 0 ? 0 : state.timer.time - 1,
+        },
+      };
 
     default:
       return state;
