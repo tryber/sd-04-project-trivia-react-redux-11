@@ -97,4 +97,5 @@ QuestionAnswers.propTypes = {
   nextButton: PropTypes.func.isRequired,
   feedback: PropTypes.bool.isRequired,
   timeOver: PropTypes.bool.isRequired,
+  timerOverProps: PropTypes.func.isRequired,
 };
