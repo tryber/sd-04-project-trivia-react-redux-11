@@ -15,7 +15,7 @@ const answers = (state = INITIAL_STATE, action) => {
         ...state,
         answerType: action.answerType,
         isAnswered: true,
-        timer: ({ ...state.timer, timeOn: false, timeOver: true }),
+        timer: ({ ...state.timer, timeOn: false }),
       };
     case NEXT_BUTTON:
       if (state.selected === 4) return { ...state, feedback: true };

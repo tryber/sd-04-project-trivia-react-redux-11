@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { chooseAnswer, nextQuestion } from '../action';
+import { chooseAnswer, nextQuestion, timerOver } from '../action';
 import sortAnswers from '../services/sortAnswers';
 import Button from './ultilityComponents/Button';
 import Timer from './Timer';
@@ -14,6 +14,7 @@ const QuestionAnswers = ({
   selected,
   isAnswered,
   nextButton,
+  timerOverProps,
   feedback,
   timeOver,
 }) => {
@@ -56,7 +57,10 @@ const QuestionAnswers = ({
         })}
         {(isAnswered || timeOver) && (
           <Button
-            onClick={() => { nextButton(); }}
+            onClick={async () => {
+              await timerOverProps();
+              await nextButton();
+            }}
             className="nextButton"
             test="btn-next"
             name="Próxima"
@@ -80,6 +84,7 @@ const mapState = (state) => ({
 const mapDispatch = {
   selectAnswer: chooseAnswer,
   nextButton: nextQuestion,
+  timerOverProps: timerOver,
 };
 
 export default connect(mapState, mapDispatch)(QuestionAnswers);

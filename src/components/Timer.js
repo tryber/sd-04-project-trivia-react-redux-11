@@ -46,8 +46,7 @@ class Timer extends Component {
 
   async timerStop() {
     const { timerOverProps } = this.props;
-    await timerOverProps(true, false);
-    await this.timerReset();
+    timerOverProps(true, false);
   }
 
   render() {
