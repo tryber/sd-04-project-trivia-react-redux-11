@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Input from '../components/ultilityComponents/Input';
 import Button from '../components/ultilityComponents/Button';
-import { onChange, getAPI } from '../action';
+import { onChange, getAPI, playButton } from '../action';
 import configIcon from '../images/config-icon.png';
 import Image from '../components/ultilityComponents/Image';
 
-const Login = ({ onChangeProps, name, email, fecthAPI }) => (
+const Login = ({ playButtonProps, onChangeProps, name, email, fecthAPI }) => (
   <div>
     <Input
       onChange={(e) => onChangeProps(e.target.name, e.target.value)}
@@ -22,7 +22,10 @@ const Login = ({ onChangeProps, name, email, fecthAPI }) => (
     />
     <Link to="/game">
       <Button
-        onClick={() => fecthAPI()}
+        onClick={() => {
+          fecthAPI();
+          playButtonProps(name, email);
+        }}
         isDisabled={!(name && email)}
         test="btn-play"
         name="Jogar"
@@ -42,6 +45,7 @@ const mapState = (state) => ({
 const mapDispatch = {
   onChangeProps: onChange,
   fecthAPI: getAPI,
+  playButtonProps: playButton,
 };
 
 export default connect(mapState, mapDispatch)(Login);
@@ -51,4 +55,5 @@ Login.propTypes = {
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   fecthAPI: PropTypes.func.isRequired,
+  playButtonProps: PropTypes.func.isRequired,
 };

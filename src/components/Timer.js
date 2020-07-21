@@ -1,75 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { timerInit, timerOver } from '../action';
-
-const initialState = { time: 30 };
+import { setTimer, resetTimer } from '../action';
 
 class Timer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = initialState;
-    this.timerStart = this.timerStart.bind(this);
-    this.timerStop = this.timerStop.bind(this);
-    this.timerReset = this.timerReset.bind(this);
-  }
-
   componentDidMount() {
-    const { timerInitProps } = this.props;
-    timerInitProps(true);
+    console.log('mond');
+    const {
+      setTimerProps,
+      resetTimerProps,
+      actualTime,
+      isAnswered,
+    } = this.props;
+
+    if (actualTime === 0) resetTimerProps();
+    this.looper = setInterval(() => {
+      if (isAnswered || actualTime === 0) resetTimerProps();
+      setTimerProps();
+    }, 1000);
   }
 
-  componentDidUpdate() {
-    const { time } = this.state;
-    const { timeOn } = this.props;
-    if (timeOn && time > 0) {
-      this.timerStart();
-    }
-    if (time === 0) {
-      this.timerStop();
-    }
-    if (time !== 0 && time < 30 && !timeOn) {
-      this.timerReset();
-    }
-  }
-
-  timerReset() {
-    this.setState(initialState);
-  }
-
-  timerStart() {
-    const { time } = this.state;
-    setTimeout(() => {
-      this.setState({ time: time - 1 });
-    }, 200);
-  }
-
-  async timerStop() {
-    const { timerOverProps } = this.props;
-    await timerOverProps(true, false);
-    await this.timerReset();
+  componentWillUnmount() {
+    clearInterval(this.looper);
   }
 
   render() {
-    const { time } = this.state;
-    return <div>{time}</div>;
+    const { actualTime } = this.props;
+    return <div>{actualTime}</div>;
   }
 }
 const mapStateToProps = (state) => ({
-  timeOn: state.answers.timer.timeOn,
-  timeOver: state.answers.timer.timeOver,
+  actualTime: state.answers.timer,
   isAnswered: state.answers.isAnswered,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  timerInitProps: (e) => dispatch(timerInit(e)),
-  timerOverProps: (e) => dispatch(timerOver(e)),
-});
+const mapDispatchToProps = {
+  setTimerProps: setTimer,
+  resetTimerProps: resetTimer,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
 Timer.propTypes = {
-  timeOn: PropTypes.bool.isRequired,
-  timerInitProps: PropTypes.func.isRequired,
-  timerOverProps: PropTypes.func.isRequired,
+  actualTime: PropTypes.number.isRequired,
+  setTimerProps: PropTypes.func.isRequired,
+  resetTimerProps: PropTypes.func.isRequired,
 };
