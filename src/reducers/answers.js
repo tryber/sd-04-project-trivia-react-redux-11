@@ -1,21 +1,21 @@
 import {
   CHOOSE_ANSWER,
   NEXT_BUTTON,
-  TIMER_INIT,
-  TIMER_OVER,
   SAVE_NAME_EMAIL,
-  SHOW_TIME,
   SET_TIMER,
   RESET_TIMER,
 } from '../action';
 import { setLocal } from '../services/setGetLocalStorage';
+import calculatePoints from '../services/calculatePoints';
 
 const INITIAL_STATE = {
-  player: { name: '', assertions: 0, score: 0, gravatarEmail: '' },
   answerType: null,
-  selected: 0,
-  isAnswered: false,
+  difficulty: 1,
   feedback: false,
+  isAnswered: false,
+  player: { name: '', assertions: 0, score: 0, gravatarEmail: '' },
+  ranking: [],
+  selected: 0,
   timer: 30,
 };
 
@@ -45,9 +45,46 @@ const answers = (state = INITIAL_STATE, action) => {
         ...state,
         answerType: action.answerType,
         isAnswered: true,
+        player: {
+          ...state.player,
+          assertions:
+            action.answerType === 'correct'
+              ? state.player.assertions + 1
+              : state.player.assertions,
+          score: calculatePoints(
+            action.answerType,
+            state.timer,
+            state.difficulty,
+            state.player.score,
+            state.player.assertions,
+            state.player.name,
+            state.player.gravatarEmail
+          ),
+        },
       };
     case NEXT_BUTTON:
-      if (state.selected === 4) return { ...state, feedback: true };
+      if (state.selected === 4) {
+        setLocal('ranking', [
+          ...state.ranking,
+          {
+            name: state.player.name,
+            score: state.player.score,
+            picture: 'url-da-foto-no-gravatar',
+          },
+        ]);
+        return {
+          ...state,
+          feedback: true,
+          ranking: [
+            ...state.ranking,
+            {
+              name: state.player.name,
+              score: state.player.score,
+              picture: 'url-da-foto-no-gravatar',
+            },
+          ],
+        };
+      }
       return {
         ...state,
         isAnswered: false,
