@@ -5,6 +5,7 @@ export const REQUEST_API = 'REQUEST_API';
 export const REQUEST_TOKEN_SUCCESS = 'REQUEST_TOKEN_SUCCESS';
 export const REQUEST_API_SUCCESS = 'REQUEST_API_SUCCESS';
 export const REQUEST_API_FAILURE = 'REQUEST_API_FAILURE';
+export const SAVE_NAME_EMAIL = 'SAVE_NAME_EMAIL';
 export const CHOOSE_ANSWER = 'CHOOSE_ANSWER';
 export const NEXT_BUTTON = 'NEXT_BUTTON';
 export const SET_TIME = 'SET_TIME';
@@ -49,6 +50,12 @@ export const getAPI = () => (dispatch) => {
   );
 };
 
+export const playButton = (name, email) => ({
+  type: SAVE_NAME_EMAIL,
+  name,
+  email,
+});
+
 export const chooseAnswer = (answerType) => ({
   type: CHOOSE_ANSWER,
   answerType,
@@ -62,4 +69,5 @@ export const setTime = (time) => ({
   type: SET_TIME,
   time,
 });
+
 

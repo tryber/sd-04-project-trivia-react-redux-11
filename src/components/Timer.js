@@ -25,6 +25,7 @@ class Timer extends Component {
     return (
       <div>{time}</div>
     );
+
   }
 }
 
@@ -38,6 +39,7 @@ const mapDispatchToProps = (dispatch) => ({
   counter: (e) => dispatch(setTime(e)),
 });
 
+
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
 Timer.propTypes = {
@@ -45,4 +47,5 @@ Timer.propTypes = {
   isAnswered: PropTypes.bool.isRequired,
   timeOn: PropTypes.bool.isRequired,
   time: PropTypes.number.isRequired,
+
 };
