@@ -18,24 +18,22 @@ const INITIAL_STATE = {
   selected: 0,
   timer: 30,
 };
-const player = (action) => {
-  return ({
-    name: action.name,
-    assertions: 0,
-    score: 0,
-    gravatarEmail: action.email,
-  });
-};
+const player = (action) => ({
+  name: action.name,
+  assertions: 0,
+  score: 0,
+  gravatarEmail: action.email,
+});
 
 const answers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SAVE_NAME_EMAIL:
       setLocal('state', {
-        player: player(action)
+        player: player(action),
       });
       return {
         ...state,
-        player: player(action)
+        player: player(action),
       };
     case CHOOSE_ANSWER:
       return {
@@ -55,7 +53,7 @@ const answers = (state = INITIAL_STATE, action) => {
             state.player.score,
             state.player.assertions,
             state.player.name,
-            state.player.gravatarEmail
+            state.player.gravatarEmail,
           ),
         },
       };
@@ -91,7 +89,7 @@ const answers = (state = INITIAL_STATE, action) => {
     case SET_TIMER:
       return {
         ...state,
-        isAnswered: state.timer === 0 ? true : false,
+        isAnswered: (state.timer === 0) ? 'true' : 'false',
         timer: state.timer === 0 ? 0 : state.timer - 1,
       };
     case RESET_TIMER:
