@@ -3,15 +3,13 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Login from './Pages/Login';
 import FeedBack from './Pages/FeedBack';
-// import Header from './components/Header';
 import GameDisplay from './Pages/GameDisplay';
 import SettingsPage from './Pages/SettingsPage';
-import RankingTable from './components/RankingTable';
+import RankingTable from './Pages/RankingTable';
 
 export default function App() {
   return (
     <div className="App">
-      {/* <Header /> */}
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/game" component={GameDisplay} />

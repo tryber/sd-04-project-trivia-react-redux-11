@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { chooseAnswer, nextQuestion } from '../action';
 import sortAnswers from '../services/sortAnswers';
 import Button from './ultilityComponents/Button';
+import Header from './Header';
 import Timer from './Timer';
 import '../App.css';
 
@@ -25,6 +26,7 @@ const QuestionAnswers = ({
   const answers = sortAnswers(concatArr);
   return (
     <div className="questions-container">
+      {<Header />}
       <div className="question-card">
         <h3 data-testid="question-category">{actualTrivia.category}</h3>
         <h2 data-testid="question-text">{actualTrivia.question}</h2>
