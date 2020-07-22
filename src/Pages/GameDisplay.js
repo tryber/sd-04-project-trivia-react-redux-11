@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getAPI, chooseAnswer } from '../redux/actions';
 import QuestionAnswers from '../components/QuestionAnswers';
 import Header from '../components/Header';
+import Timer from '../components/Timer';
 
 class GameDisplay extends React.Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class GameDisplay extends React.Component {
       <>
         <Header />
         <QuestionAnswers />
+        <Timer />
       </>
     );
   }

@@ -66,7 +66,6 @@ const QuestionAnswers = ({
           />
         )}
       </div>
-      <Timer />
     </div>
   );
 };
@@ -77,6 +76,7 @@ const mapState = (state) => ({
   isAnswered: state.answers.isAnswered,
   selected: state.answers.selected,
   feedback: state.answers.feedback,
+
 });
 
 const mapDispatch = {

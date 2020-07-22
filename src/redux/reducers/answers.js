@@ -59,7 +59,7 @@ const answers = (state = INITIAL_STATE, action) => {
             state.player.score,
             state.player.assertions,
             state.player.name,
-            state.player.gravatarEmail,
+            state.player.gravatarEmail
           ),
         },
       };
@@ -96,7 +96,7 @@ const answers = (state = INITIAL_STATE, action) => {
       if (!state.isAnswered) {
         return {
           ...state,
-          isAnswered: state.timer === 0 ? true : false,
+          isAnswered: state.timer === 0,
           timer: state.timer === 0 ? 0 : state.timer - 1,
         };
       }

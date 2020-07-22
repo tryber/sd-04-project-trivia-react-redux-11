@@ -15,8 +15,11 @@ class Timer extends Component {
 
     if (actualTime === 0) resetTimerProps();
     this.looper = setInterval(() => {
-      if (isAnswered || actualTime === 0) resetTimerProps();
-      setTimerProps();
+      if (!isAnswered || actualTime > 0) setTimerProps();
+      else {
+        clearInterval(this.looper);
+        resetTimerProps();
+      }
     }, 1000);
   }
 
