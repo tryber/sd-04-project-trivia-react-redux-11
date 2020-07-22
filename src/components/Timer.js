@@ -1,48 +1,50 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setTimer, resetTimer } from '../action';
+import { setTime } from '../action';
 
 class Timer extends Component {
-  componentDidMount() {
-    console.log('mond');
-    const {
-      setTimerProps,
-      resetTimerProps,
-      actualTime,
-      isAnswered,
-    } = this.props;
 
-    if (actualTime === 0) resetTimerProps();
-    this.looper = setInterval(() => {
-      if (isAnswered || actualTime === 0) resetTimerProps();
-      setTimerProps();
-    }, 1000);
+  componentDidMount() {
+    const { counter } = this.props;
+    this.counterId = setInterval(() => counter(), 1000);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.looper);
+  componentDidUpdate() {
+    const { isAnswered, counter, timeOn } = this.props;
+    if (isAnswered) {
+      clearInterval(this.counterId);
+    }
+    if (timeOn && !isAnswered) {
+      setTimeout(() => counter(), 100);
+    }
   }
 
   render() {
-    const { actualTime } = this.props;
-    return <div>{actualTime}</div>;
+    const { time } = this.props;
+    return (
+      <div>{time}</div>
+    );
   }
 }
+
 const mapStateToProps = (state) => ({
-  actualTime: state.answers.timer,
+  time: state.answers.timer.time,
+  timeOn: state.answers.timer.timeOn,
   isAnswered: state.answers.isAnswered,
 });
 
-const mapDispatchToProps = {
-  setTimerProps: setTimer,
-  resetTimerProps: resetTimer,
-};
+const mapDispatchToProps = (dispatch) => ({
+  counter: (e) => dispatch(setTime(e)),
+});
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
 
 Timer.propTypes = {
-  actualTime: PropTypes.number.isRequired,
-  setTimerProps: PropTypes.func.isRequired,
-  resetTimerProps: PropTypes.func.isRequired,
+  counter: PropTypes.func.isRequired,
+  isAnswered: PropTypes.bool.isRequired,
+  timeOn: PropTypes.bool.isRequired,
+  time: PropTypes.number.isRequired,
+
 };

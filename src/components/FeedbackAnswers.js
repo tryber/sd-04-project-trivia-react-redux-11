@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const FeedbackAnswers = ({ assertions, score }) => {
   if (assertions >= 3) {
     return (
-      <div data-testid="feedback-tex">
+      <div data-testid="feedback-text">
         <h2>Mandou bem!</h2>
         <p>Você acertou <strong>{assertions}</strong> questões!</p>
         <p>Um total de <strong>{score}</strong> pontos</p>
@@ -12,7 +12,7 @@ const FeedbackAnswers = ({ assertions, score }) => {
     );
   }
   return (
-    <div data-testid="feedback-tex">
+    <div data-testid="feedback-text">
       <h2>Podia ser melhor...!</h2>
       <p>Você acertou <strong>{assertions}</strong> questões!</p>
       <p>Um total de <strong>{score}</strong> pontos</p>

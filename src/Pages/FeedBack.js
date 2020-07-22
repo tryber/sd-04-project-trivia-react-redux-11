@@ -12,10 +12,10 @@ class Feedback extends React.Component {
   }
 
   render() {
-    const { redirectGame, redirectRanking } = this.state;
+    const { redirectLogin, redirectRanking } = this.state;
     const { playerAssertions, playerScore } = this.props;
-    if (redirectGame) { return <Redirect to="/" />; }
-    if (redirectRanking) { return <Redirect to="/ranking" />; }
+    if (redirectLogin) { return <Redirect to="/" />; }
+    if (redirectRanking) { return <Redirect to="/game/ranking" />; }
 
     return (
       <div>

@@ -2,8 +2,7 @@ import {
   CHOOSE_ANSWER,
   NEXT_BUTTON,
   SAVE_NAME_EMAIL,
-  SET_TIMER,
-  RESET_TIMER,
+  SET_TIME,
 } from '../action';
 import { setLocal } from '../services/setGetLocalStorage';
 import calculatePoints from '../services/calculatePoints';
@@ -12,11 +11,12 @@ const INITIAL_STATE = {
   answerType: null,
   difficulty: 1,
   feedback: false,
+  timer: { time: 30 },
+  nextQuestion: false,
   isAnswered: false,
   player: { name: '', assertions: 0, score: 0, gravatarEmail: '' },
   ranking: [],
   selected: 0,
-  timer: 30,
 };
 
 const answers = (state = INITIAL_STATE, action) => {
@@ -45,6 +45,7 @@ const answers = (state = INITIAL_STATE, action) => {
         ...state,
         answerType: action.answerType,
         isAnswered: true,
+        timer: { ...state.timer, timeOn: true },
         player: {
           ...state.player,
           assertions:
@@ -53,12 +54,12 @@ const answers = (state = INITIAL_STATE, action) => {
               : state.player.assertions,
           score: calculatePoints(
             action.answerType,
-            state.timer,
+            state.timer.time,
             state.difficulty,
             state.player.score,
             state.player.assertions,
             state.player.name,
-            state.player.gravatarEmail
+            state.player.gravatarEmail,
           ),
         },
       };
@@ -89,18 +90,17 @@ const answers = (state = INITIAL_STATE, action) => {
         ...state,
         isAnswered: false,
         selected: state.selected + 1,
-        timer: 30,
+        timer: { timeOn: true, time: 30 },
       };
-    case SET_TIMER:
-      if (!state.isAnswered)
-        return {
-          ...state,
-          isAnswered: state.timer === 0 ? true : false,
-          timer: state.timer === 0 ? 0 : state.timer - 1,
-        };
-      return state;
-    case RESET_TIMER:
-      return { ...state, timer: 30 };
+    case SET_TIME:
+      return {
+        ...state,
+        timer: {
+          ...state.timer, time: state.timer.time === 0 ? 0 : state.timer.time - 1,
+        },
+      };
+
+
     default:
       return state;
   }

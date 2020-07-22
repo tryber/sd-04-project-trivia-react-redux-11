@@ -8,9 +8,7 @@ export const REQUEST_API_FAILURE = 'REQUEST_API_FAILURE';
 export const SAVE_NAME_EMAIL = 'SAVE_NAME_EMAIL';
 export const CHOOSE_ANSWER = 'CHOOSE_ANSWER';
 export const NEXT_BUTTON = 'NEXT_BUTTON';
-export const SET_TIMER = 'SET_TIMER';
-export const RESET_TIMER = 'TIME_INIT';
-export const SHOW_TIME = 'SHOW_TIME';
+export const SET_TIME = 'SET_TIME';
 
 export const onChange = (name, value) => ({
   type: ON_CHANGE,
@@ -67,10 +65,7 @@ export const nextQuestion = () => ({
   type: NEXT_BUTTON,
 });
 
-export const setTimer = () => ({
-  type: SET_TIMER,
-});
-
-export const resetTimer = () => ({
-  type: RESET_TIMER,
+export const setTime = (time) => ({
+  type: SET_TIME,
+  time,
 });
