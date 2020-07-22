@@ -16,11 +16,11 @@ const QuestionAnswers = ({
   nextButton,
   feedback,
 }) => {
-  if (feedback) return <Redirect to="/feedback" />;
+  if (feedback) return <Redirect to="/game/feedback" />;
   let index = -1;
   const actualTrivia = triviaData[selected % triviaData.length];
   const concatArr = actualTrivia.incorrect_answers.concat(
-    actualTrivia.correct_answer
+    actualTrivia.correct_answer,
   );
   const answers = sortAnswers(concatArr);
   return (
@@ -94,5 +94,4 @@ QuestionAnswers.propTypes = {
   isAnswered: PropTypes.bool.isRequired,
   nextButton: PropTypes.func.isRequired,
   feedback: PropTypes.bool.isRequired,
-  timeOver: PropTypes.bool.isRequired,
 };

@@ -1,68 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import FeedbackAnswears from '../components/FeedbackAnswers'; // porque nao chama??
+import FeedbackAnswears from '../components/FeedbackAnswers';
 
 class Feedback extends React.Component {
-  restartGame() {
-    const { clearlogin } = this.props;
-    clearlogin();
-    // criar na action
-  }
-
-  newGame() {
-    const { clearpoints } = this.props;
-    clearpoints();
-    // criar na action
-  }
-
-  tryAgain() {
-    return (
-      <Link to="/">
-        <button type="button" onClick={() => this.newGame()}>Tentar novamente</button>
-      </Link>
-    );
+  constructor(props) {
+    super(props);
+    this.state = ({ redirectLogin: false, redirectRanking: false });
   }
 
   render() {
-    const { totalAnswears, scorePoints } = this.props;
+    const { redirectGame, redirectRanking } = this.state;
+    const { playerAssertions, playerScore } = this.props;
+    if (redirectGame) { return <Redirect to="/" />; }
+    if (redirectRanking) { return <Redirect to="/ranking" />; }
+
     return (
       <div>
         <Header />
-        <FeedbackAnswears totalAnswears={totalAnswears} />
-        <div>
-          <span>Você acertou</span>
-          <span data-testid="feedback-total-question">{totalAnswears}</span>
-          <span>questões</span>
-        </div>
-        <div>
-          <span>Fez um total de</span>
-          <span data-testid="feedback-total-score">{scorePoints}</span>
-          <span>pontos</span>
-        </div>
-        {this.tryAgain()}
-        <Link to="/">
-          <button type="button" onClick={() => this.restartGame()} data-testid="btn-play-again">
-            Jogar novamente
+        <FeedbackAnswears assertions={playerAssertions} score={playerScore} />
+        <button
+          type="button" onClick={() => this.setState({ redirectLogin: true })}
+          data-testid="btn-play-again"
+        >
+          Jogar novamente
           </button>
-        </Link>
-        <Link to="/">
-          <button type="button" onClick={() => this.restartGame()} data-testid="btn-ranking">
-            Ver Ranking
-          </button>
-        </Link>
-      </div>
+        <button
+          type="button" onClick={() => this.setState({ redirectRanking: true })}
+          data-testid="btn-ranking"
+        >
+          Ver Ranking
+          </button >
+      </div >
     );
   }
 }
 
-export default connect()(Feedback);
+const mapStateToProps = (state) => ({
+  playerScore: state.answers.player.score,
+  playerAssertions: state.answers.player.assertions,
+});
+
+export default connect(mapStateToProps)(Feedback);
 
 Feedback.propTypes = {
-  clearlogin: PropTypes.func.isRequired,
-  clearpoints: PropTypes.func.isRequired,
-  totalAnswears: PropTypes.string.isRequired,
-  scorePoints: PropTypes.number.isRequired,
+  playerAssertions: PropTypes.string.isRequired,
+  playerScore: PropTypes.number.isRequired,
 };
