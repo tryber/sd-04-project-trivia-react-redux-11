@@ -16,11 +16,11 @@ class GameDisplay extends React.Component {
     const { loading, triviaData } = this.props;
     if (loading || triviaData.length === 0) return <p>Loading</p>;
     return (
-      <>
+      <div>
         <Header />
         <QuestionAnswers />
         <Timer />
-      </>
+      </div>
     );
   }
 }

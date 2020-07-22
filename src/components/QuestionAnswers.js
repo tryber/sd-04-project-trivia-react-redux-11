@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { chooseAnswer, nextQuestion } from '../redux/actions';
 import sortAnswers from '../services/sortAnswers';
 import Button from './ultilityComponents/Button';
-import Timer from './Timer';
 import '../App.css';
 
 const QuestionAnswers = ({

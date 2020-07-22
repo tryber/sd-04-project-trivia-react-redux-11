@@ -8,6 +8,7 @@ import {
 } from '../actions';
 import { setLocal } from '../../services/setGetLocalStorage';
 import calculatePoints from '../../services/calculatePoints';
+import updateTimer from '../../services/reducerutility';
 
 const INITIAL_STATE = {
   answerType: null,
@@ -59,7 +60,7 @@ const answers = (state = INITIAL_STATE, action) => {
             state.player.score,
             state.player.assertions,
             state.player.name,
-            state.player.gravatarEmail
+            state.player.gravatarEmail,
           ),
         },
       };
@@ -93,14 +94,7 @@ const answers = (state = INITIAL_STATE, action) => {
         timer: 30,
       };
     case SET_TIMER:
-      if (!state.isAnswered) {
-        return {
-          ...state,
-          isAnswered: state.timer === 0,
-          timer: state.timer === 0 ? 0 : state.timer - 1,
-        };
-      }
-      return state;
+      return updateTimer(state, state.isAnswered, state.timer);
     case RESET_TIMER:
       return { ...state, timer: 30 };
     case RESET_GAME:
