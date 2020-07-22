@@ -17,7 +17,6 @@ const INITIAL_STATE = {
   player: { name: '', assertions: 0, score: 0, gravatarEmail: '' },
   ranking: [],
   selected: 0,
-  timer: 30,
 };
 
 const answers = (state = INITIAL_STATE, action) => {
@@ -55,12 +54,12 @@ const answers = (state = INITIAL_STATE, action) => {
               : state.player.assertions,
           score: calculatePoints(
             action.answerType,
-            state.timer,
+            state.timer.time,
             state.difficulty,
             state.player.score,
             state.player.assertions,
             state.player.name,
-            state.player.gravatarEmail
+            state.player.gravatarEmail,
           ),
         },
       };

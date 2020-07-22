@@ -25,7 +25,6 @@ class Timer extends Component {
     return (
       <div>{time}</div>
     );
-
   }
 }
 

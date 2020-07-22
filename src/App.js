@@ -13,11 +13,11 @@ export default function App() {
     <div className="App">
       {/* <Header /> */}
       <Switch>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/game" component={GameDisplay} />
         <Route path="/game/feedback" component={FeedBack} />
         <Route path="/game/settings" component={SettingsPage} />
-        <Route path="/ranking" component={RankingTable} />
-        <Route exact path="/game" component={GameDisplay} />
-        <Route exact path="/" component={Login} />
+        <Route path="/game/ranking" component={RankingTable} />
       </Switch>
     </div>
   );

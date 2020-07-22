@@ -2,7 +2,7 @@ import { setLocal } from './setGetLocalStorage';
 
 const calculatePoints = (
   answerType,
-  timer,
+  time,
   difficulty,
   score,
   assertions,
@@ -10,7 +10,7 @@ const calculatePoints = (
   email,
 ) => {
   if (answerType === 'correct') {
-    const newScore = score + 10 + timer * difficulty;
+    const newScore = score + 10 + time * difficulty;
     setLocal('state', {
       player: {
         name,
@@ -19,7 +19,7 @@ const calculatePoints = (
         gravatarEmail: email,
       },
     });
-    return score + 10 + timer * difficulty;
+    return score + 10 + time * difficulty;
   }
   return score;
 };
