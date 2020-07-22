@@ -69,5 +69,3 @@ export const setTime = (time) => ({
   type: SET_TIME,
   time,
 });
-
-
