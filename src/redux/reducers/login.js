@@ -1,4 +1,4 @@
-import { ON_CHANGE } from '../action';
+import { ON_CHANGE } from '../actions';
 
 const INITIAL_STATE = {
   name: '',

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Input from '../components/ultilityComponents/Input';
 import Button from '../components/ultilityComponents/Button';
-import { onChange, getAPI, playButton } from '../action';
+import { onChange, getAPI, playButton } from '../redux/actions';
 import configIcon from '../images/config-icon.png';
 import Image from '../components/ultilityComponents/Image';
 
@@ -31,7 +31,7 @@ const Login = ({ playButtonProps, onChangeProps, name, email, fecthAPI }) => (
         name="Jogar"
       />
     </Link>
-    <Link to="game/settings" test="btn-settings" name="Configurações">
+    <Link to="game/settings" data-testid="btn-settings" name="Configurações">
       <Image src={configIcon} alt="ícone de engrenagem" width="40px" />
     </Link>
   </div>

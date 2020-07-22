@@ -2,11 +2,12 @@ import {
   CHOOSE_ANSWER,
   NEXT_BUTTON,
   SAVE_NAME_EMAIL,
+  RESET_GAME,
   SET_TIMER,
   RESET_TIMER,
-} from '../action';
-import { setLocal } from '../services/setGetLocalStorage';
-import calculatePoints from '../services/calculatePoints';
+} from '../actions';
+import { setLocal } from '../../services/setGetLocalStorage';
+import calculatePoints from '../../services/calculatePoints';
 
 const INITIAL_STATE = {
   answerType: null,
@@ -58,7 +59,7 @@ const answers = (state = INITIAL_STATE, action) => {
             state.player.score,
             state.player.assertions,
             state.player.name,
-            state.player.gravatarEmail
+            state.player.gravatarEmail,
           ),
         },
       };
@@ -92,15 +93,18 @@ const answers = (state = INITIAL_STATE, action) => {
         timer: 30,
       };
     case SET_TIMER:
-      if (!state.isAnswered)
+      if (!state.isAnswered) {
         return {
           ...state,
           isAnswered: state.timer === 0 ? true : false,
           timer: state.timer === 0 ? 0 : state.timer - 1,
         };
+      }
       return state;
     case RESET_TIMER:
       return { ...state, timer: 30 };
+    case RESET_GAME:
+      return { ...state, selected: 0, feedback: false, isAnswered: false };
     default:
       return state;
   }
