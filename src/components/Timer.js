@@ -16,7 +16,7 @@ class Timer extends Component {
       clearInterval(this.counterId);
     }
     if (timeOn && !isAnswered) {
-      setTimeout(() => counter(), 1000);
+      setTimeout(() => counter(), 100);
     }
   }
 

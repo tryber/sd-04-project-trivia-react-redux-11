@@ -16,8 +16,8 @@ class Header extends Component {
         )}
         {userData && <p data-testid="header-player-name">{`Jogador: ${userData.name}`}</p>}
         <div>
-          <span>Pontos:</span>
-          <span data-testid="header-score">{score}</span>
+          <p>Pontos:</p>
+          <p data-testid="header-score">{score}</p>
         </div>
       </div>
     );
