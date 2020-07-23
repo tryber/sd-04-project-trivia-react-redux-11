@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getAPI, chooseAnswer } from '../action';
+import { getAPI, chooseAnswer } from '../redux/actions';
 import QuestionAnswers from '../components/QuestionAnswers';
+import Header from '../components/Header';
+import Timer from '../components/Timer';
 
 class GameDisplay extends React.Component {
   componentDidMount() {
@@ -13,7 +15,13 @@ class GameDisplay extends React.Component {
   render() {
     const { loading, triviaData } = this.props;
     if (loading || triviaData.length === 0) return <p>Loading</p>;
-    return <QuestionAnswers />;
+    return (
+      <div>
+        <Header />
+        <QuestionAnswers />
+        <Timer />
+      </div>
+    );
   }
 }
 
@@ -33,6 +41,7 @@ export default connect(mapState, mapDispatch)(GameDisplay);
 
 GameDisplay.propTypes = {
   requestTrivia: PropTypes.func.isRequired,
-  triviaData: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
+  triviaData: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object]))
+    .isRequired,
   loading: PropTypes.bool.isRequired,
 };

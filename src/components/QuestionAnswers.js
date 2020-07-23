@@ -2,10 +2,9 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { chooseAnswer, nextQuestion } from '../action';
+import { chooseAnswer, nextQuestion } from '../redux/actions';
 import sortAnswers from '../services/sortAnswers';
 import Button from './ultilityComponents/Button';
-import Timer from './Timer';
 import '../App.css';
 
 const QuestionAnswers = ({
@@ -66,7 +65,6 @@ const QuestionAnswers = ({
           />
         )}
       </div>
-      <Timer />
     </div>
   );
 };
@@ -77,6 +75,7 @@ const mapState = (state) => ({
   isAnswered: state.answers.isAnswered,
   selected: state.answers.selected,
   feedback: state.answers.feedback,
+
 });
 
 const mapDispatch = {

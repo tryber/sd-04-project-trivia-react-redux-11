@@ -3,7 +3,7 @@ import {
   REQUEST_API_FAILURE,
   REQUEST_API_SUCCESS,
   REQUEST_TOKEN_SUCCESS,
-} from '../action';
+} from '../actions';
 
 const INITIAL_STATE = {
   token: '',

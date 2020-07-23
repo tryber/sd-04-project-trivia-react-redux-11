@@ -1,4 +1,4 @@
-import fetchFunction from '../services/fetchFunction';
+import fetchFunction from '../../services/fetchFunction';
 
 export const ON_CHANGE = 'ON_CHANGE';
 export const REQUEST_API = 'REQUEST_API';
@@ -11,6 +11,7 @@ export const NEXT_BUTTON = 'NEXT_BUTTON';
 export const SET_TIMER = 'SET_TIMER';
 export const RESET_TIMER = 'TIME_INIT';
 export const SHOW_TIME = 'SHOW_TIME';
+export const RESET_GAME = 'RESET_GAME';
 
 export const onChange = (name, value) => ({
   type: ON_CHANGE,
@@ -73,4 +74,8 @@ export const setTimer = () => ({
 
 export const resetTimer = () => ({
   type: RESET_TIMER,
+});
+
+export const resetGame = () => ({
+  type: RESET_GAME,
 });
